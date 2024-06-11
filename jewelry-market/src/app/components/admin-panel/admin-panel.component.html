@@ -1,0 +1,48 @@
+<h2>Admin Panel</h2>
+<button (click)="navigateToAddItem()" class="add-item-button">
+  Add New Item
+</button>
+
+<!-- Items List Grouped by Category -->
+<div *ngFor="let category of categories" class="category-section">
+  <h3>{{ category.name }}</h3>
+  <table
+    *ngIf="getItemsByCategory(category.value).length > 0"
+    class="items-table"
+  >
+    <thead>
+      <tr>
+        <th>დასახელება</th>
+        <th>ფასი</th>
+        <th>რაოდენობა</th>
+        <th>ცვლილება</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getItemsByCategory(category.value)">
+        <td>{{ item.itemName }}</td>
+        <td>{{ item.price | currency }}</td>
+        <td [ngStyle]="{ color: item.quantity === 0 ? 'red' : 'inherit' }">
+          {{ item.quantity === 0 ? "არ არის მარაგში" : item.quantity }}
+        </td>
+        <td class="buttons">
+          <button
+            class="action-button edit-button"
+            (click)="navigateToEditItem(item.id)"
+          >
+            Edit
+          </button>
+          <button
+            class="action-button delete-button"
+            (click)="onDelete(item.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="getItemsByCategory(category.value).length === 0">
+    No items in this category
+  </p>
+</div>

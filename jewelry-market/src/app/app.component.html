@@ -1,0 +1,30 @@
+<nav>
+  <div class="nav-links">
+    <div>
+      <a routerLink="/items" routerLinkActive="active">Home</a>
+      <a
+        *ngIf="role === 'Admin'"
+        routerLink="/admin-panel"
+        routerLinkActive="active"
+        >Admin Panel</a
+      >
+    </div>
+    <a routerLink="/register" routerLinkActive="active" *ngIf="!isLoggedIn"
+      >Register</a
+    >
+    <a routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn"
+      >Login</a
+    >
+  </div>
+  <div *ngIf="isLoggedIn" class="user-menu">
+    <span class="balance">ბალანსი: {{ balance | currency }}</span>
+    <div class="username-dropdown">
+      <span class="username">{{ username }} &#9662;</span>
+      <div class="dropdown-menu">
+        <a (click)="logout()">Logout</a>
+        <a routerLink="/edit-profile">Edit Profile</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

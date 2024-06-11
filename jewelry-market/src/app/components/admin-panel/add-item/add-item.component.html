@@ -1,0 +1,29 @@
+<h2>Add New Item</h2>
+<form [formGroup]="addItemForm" (ngSubmit)="onSubmit()" class="item-form">
+  <div class="form-group">
+    <label for="itemName">დასახელება</label>
+    <input id="itemName" formControlName="itemName" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="price">ფასი</label>
+    <input id="price" formControlName="price" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="quantity">რაოდენობა</label>
+    <input id="quantity" formControlName="quantity" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="category">კატეგორია</label>
+    <select id="category" formControlName="category">
+      <option *ngFor="let category of categories" [value]="category.value">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+  <div class="button-group">
+    <button type="submit" [disabled]="addItemForm.invalid">Add Item</button>
+    <button type="button" (click)="onCancel()" class="cancel-button">
+      Cancel
+    </button>
+  </div>
+</form>

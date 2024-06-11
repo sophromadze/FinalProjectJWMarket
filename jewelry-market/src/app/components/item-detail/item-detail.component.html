@@ -1,0 +1,14 @@
+<div class="item-detail-container" *ngIf="item">
+  <button class="back-button" (click)="goBack()">&#x2190;</button>
+  <h2>{{ item.itemName }}</h2>
+  <p>ფასი: {{ item.price | currency }}</p>
+  <p>
+    რაოდენობა:
+    <span [ngStyle]="{ color: item.quantity === 0 ? 'red' : 'inherit' }">
+      {{ item.quantity === 0 ? "არ არის მარაგში" : item.quantity }}
+    </span>
+  </p>
+  <p>კატეგორია: {{ getCategoryName(item.category) }}</p>
+  <button (click)="addToCart(item)">Add to Cart</button>
+  <button (click)="buyItem(item)">Buy</button>
+</div>

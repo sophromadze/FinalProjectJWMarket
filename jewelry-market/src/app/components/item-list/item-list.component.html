@@ -1,0 +1,27 @@
+<div class="item-list-container">
+  <h2>Jewelry Items</h2>
+  <div class="categories">
+    <button
+      *ngFor="let categoryName of categoryNames"
+      (click)="setCategory(categoryName)"
+    >
+      {{ categoryName.charAt(0).toUpperCase() + categoryName.slice(1) }}
+    </button>
+  </div>
+  <div class="items">
+    <h3 *ngIf="category !== null">
+      {{ category.charAt(0).toUpperCase() + category.slice(1) }}
+    </h3>
+    <div class="item" *ngFor="let item of items">
+      <h4>{{ item.itemName }}</h4>
+      <p>ფასი: {{ item.price | currency }}</p>
+      <p>
+        რაოდენობა:
+        <span [ngStyle]="{ color: item.quantity === 0 ? 'red' : 'inherit' }">
+          {{ item.quantity === 0 ? "არ არის მარაგში" : item.quantity }}
+        </span>
+      </p>
+      <button (click)="viewItem(item)">View Details</button>
+    </div>
+  </div>
+</div>
